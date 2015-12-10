@@ -62,7 +62,7 @@ var GameBoard = React.createClass({
                     'div',
                     null,
                     a.map(function (piece) {
-                        return React.createElement(_BoardPiece2['default'], { id: piece.id, isMine: piece.isMine, isRevealed: piece.isRevealed, minesAround: piece.minesAround, isFlag: piece.isFlag });
+                        return React.createElement(_BoardPiece2['default'], { piece: piece });
                     })
                 );
             })

@@ -42,7 +42,7 @@ let GameBoard = React.createClass({
                                 <div>
                                     {
                                         a.map(function(piece){
-                                            return <BoardPiece id={piece.id} isMine={piece.isMine} isRevealed={piece.isRevealed} minesAround={piece.minesAround} isFlag={piece.isFlag} />;
+                                            return <BoardPiece piece={piece} />;
                                         })
                                     }
                                 </div>

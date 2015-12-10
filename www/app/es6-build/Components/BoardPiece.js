@@ -21,12 +21,6 @@ var _StoresGameStore2 = _interopRequireDefault(_StoresGameStore);
 var BoardPiece = React.createClass({
     displayName: 'BoardPiece',
 
-    // state should be controlled by the store because when reveal tile
-    // it overrides the current state by the props, we can choose to manage
-    // the state by the props that we get from the store or we could manage
-    // it locally, or both of them which is more expensive. i tend to use
-    // the store option because events and listeners make sense to me.
-
     propTypes: {
         id: React.PropTypes.number.isRequired,
         isMine: React.PropTypes.bool.isRequired,
@@ -36,35 +30,35 @@ var BoardPiece = React.createClass({
     },
 
     shouldComponentUpdate: function shouldComponentUpdate(nextProps, nextState) {
-        return this.props.isRevealed !== nextProps.isRevealed || nextProps.isFlag !== this.props.isFlag;
+        return this.props.piece.isRevealed !== nextProps.isRevealed || nextProps.isFlag !== this.props.piece.isFlag;
     },
 
     revealTile: function revealTile() {
-        if (!this.props.isFlag && !this.props.isRevealed && !_StoresGameStore2['default'].isGameOver()) {
-            _ActionsActions2['default'].revealTile(this.props.id);
+        if (!this.props.piece.isFlag && !this.props.piece.isRevealed && !_StoresGameStore2['default'].isGameOver()) {
+            _ActionsActions2['default'].revealTile(this.props.piece.id);
         }
     },
 
     toggleFlag: function toggleFlag(e) {
         e.preventDefault();
-        if (!this.props.isRevealed && (_StoresGameStore2['default'].getFlagsCount() || this.props.isFlag) && !_StoresGameStore2['default'].isGameOver()) {
-            _ActionsActions2['default'].toggleFlag(this.props.id);
+        if (!this.props.piece.isRevealed && (_StoresGameStore2['default'].getFlagsCount() || this.props.piece.isFlag) && !_StoresGameStore2['default'].isGameOver()) {
+            _ActionsActions2['default'].toggleFlag(this.props.piece.id);
         }
     },
 
     render: function render() {
         var classes = classNames({
             'board-piece': true,
-            'revealed-mine': this.props.isRevealed && this.props.isMine,
-            'revealed-tile': this.props.isRevealed && !this.props.isMine,
-            'safe': this.props.isRevealed && !this.props.isMine && !this.props.minesAround,
-            'flag': this.props.isFlag
+            'revealed-mine': this.props.piece.isRevealed && this.props.piece.isMine,
+            'revealed-tile': this.props.piece.isRevealed && !this.props.piece.isMine,
+            'safe': this.props.piece.isRevealed && !this.props.piece.isMine && !this.props.piece.minesAround,
+            'flag': this.props.piece.isFlag
         });
 
         return React.createElement(
             'div',
             { className: classes, onClick: this.revealTile, onContextMenu: this.toggleFlag },
-            this.props.minesAround ? this.props.minesAround : ''
+            this.props.piece.minesAround ? this.props.piece.minesAround : ''
         );
     }
 });
