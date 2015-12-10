@@ -1,0 +1,1 @@
+{"version":3,"sources":["../../src/Actions/UserActions.js"],"names":[],"mappings":";;;;;AAAA,IAAI,OAAO,GAAG,MAAM,CAAC,aAAa,CAAC,CAAC,gBAAgB,CAAC,CAAC,CAAC;;qBAExC,OAAO","file":"UserActions.js","sourcesContent":["let Actions = Reflux.createActions(['changeUserName']);\r\n\r\nexport default Actions;"]}
